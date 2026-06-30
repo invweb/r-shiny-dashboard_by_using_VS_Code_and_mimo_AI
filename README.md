@@ -1,46 +1,46 @@
-# Аналитический дашборд на R Shiny
+# Analytical Dashboard on R Shiny
 
-Интерактивный веб-дашборд для анализа данных, построенный на фреймворке [Shiny](https://shiny.posit.co/) с использованием [shinydashboard](https://rstudio.github.io/shinydashboard/).
+An interactive web dashboard for data analysis built with the [Shiny](https://shiny.posit.co/) framework and [shinydashboard](https://rstudio.github.io/shinydashboard/).
 
-## Возможности
+## Features
 
-- Выбор датасета: `iris`, `mtcars`, `faithful`
-- 4 типа графиков: scatter, bar, histogram, boxplot
-- Value boxes с ключевыми метриками (строки, столбцы, уникальные значения)
-- Интерактивная таблица данных (DT)
-- Настройка размера выборки через слайдер
+- Dataset selection: `iris`, `mtcars`, `faithful`
+- 4 chart types: scatter, bar, histogram, boxplot
+- Value boxes with key metrics (rows, columns, unique values)
+- Interactive data table (DT)
+- Adjustable sample size via slider
 
-## Стек
+## Tech Stack
 
-- **Язык:** R
+- **Language:** R
 - **UI:** shinydashboard
-- **Графики:** ggplot2
-- **Обработка данных:** dplyr
-- **Таблицы:** DT
+- **Charts:** ggplot2
+- **Data processing:** dplyr
+- **Tables:** DT
 
-## Запуск
+## Getting Started
 
 ```bash
 Rscript run.R
 ```
 
-Приложение откроется в браузере по адресу `http://127.0.0.1:3838`.
+The app will open in your browser at `http://127.0.0.1:3838`.
 
-### Установка зависимостей (вручную)
+### Manual dependency installation
 
 ```r
 install.packages(c("shiny", "shinydashboard", "ggplot2", "dplyr", "DT"))
 ```
 
-## Структура проекта
+## Project Structure
 
 ```
 .
-├── app.R       # Основной файл приложения (UI + Server)
-├── run.R       # Скрипт запуска с установкой зависимостей
+├── app.R       # Main application file (UI + Server)
+├── run.R       # Launch script with dependency installation
 └── README.md
 ```
 
-## Скриншот
+## Screenshot
 
-![Дашборд](screenshot.png)
+![Dashboard](screenshot.png)
