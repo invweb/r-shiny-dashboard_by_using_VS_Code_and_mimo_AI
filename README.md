@@ -6,6 +6,7 @@ An interactive anime browser built with [Shiny](https://shiny.posit.co/). Browse
 
 ![Dashboard](screenshot.png)
 
+
 ## Features
 
 - **Card grid** — anime cover art, title, score, type at a glance
