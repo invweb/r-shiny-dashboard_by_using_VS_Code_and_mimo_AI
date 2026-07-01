@@ -1,46 +1,71 @@
-# Analytical Dashboard on R Shiny
+# Anime Dashboard — R Shiny
 
-An interactive web dashboard for data analysis built with the [Shiny](https://shiny.posit.co/) framework and [shinydashboard](https://rstudio.github.io/shinydashboard/).
+An interactive anime browser built with [Shiny](https://shiny.posit.co/). Browse thousands of anime from AniList, filter by type/status/genre/year, search by title, and click any card for details with cover art.
+
+**Live demo:** https://invweb.shinyapps.io/anime-dashboard/
+
+![Dashboard](screenshot.png)
 
 ## Features
 
-- Dataset selection: `iris`, `mtcars`, `faithful`
-- 4 chart types: scatter, bar, histogram, boxplot
-- Value boxes with key metrics (rows, columns, unique values)
-- Interactive data table (DT)
-- Adjustable sample size via slider
+- **Card grid** — anime cover art, title, score, type at a glance
+- **Detail modal** — click any card to see episodes, studio, synopsis, genres, rating
+- **Filters** — Type, Status, Genre, Year with instant results
+- **Search** — by title (English or Japanese)
+- **Language toggle** — EN / RU switch via header button (JS-powered, no reload)
+- **Pagination** — 40 cards per page
+- **Dark theme** — custom CSS, no Shiny themes dependency
 
 ## Tech Stack
 
-- **Language:** R
-- **UI:** shinydashboard
-- **Charts:** ggplot2
-- **Data processing:** dplyr
-- **Tables:** DT
+| Layer    | Tool     |
+|----------|----------|
+| UI       | Shiny `fluidPage` + custom CSS |
+| Charts   | ggplot2 (unused, available) |
+| Data     | dplyr |
+| Data     | AniList GraphQL API via Python fetcher |
+| Hosting  | shinyapps.io (free tier) |
 
 ## Getting Started
+
+### Run locally
 
 ```bash
 Rscript run.R
 ```
 
-The app will open in your browser at `http://127.0.0.1:3838`.
+Opens at `http://127.0.0.1:3838`.
 
-### Manual dependency installation
+### Dependencies
 
 ```r
-install.packages(c("shiny", "shinydashboard", "ggplot2", "dplyr", "DT"))
+install.packages(c("shiny", "dplyr"))
 ```
 
 ## Project Structure
 
 ```
 .
-├── app.R       # Main application file (UI + Server)
-├── run.R       # Launch script with dependency installation
+├── app.R                    # Shiny application (UI + Server + i18n)
+├── run.R                    # Launch script
+├── anime_data.csv           # Anime dataset (~6000+ entries from AniList)
+├── fetch_anilist.py         # AniList API fetcher (Python, uses curl)
+├── fetch_anime_final.py     # Legacy Jikan API fetcher
+├── screenshot.png           # Dashboard screenshot
 └── README.md
 ```
 
-## Screenshot
+## Data Source
 
-![Dashboard](screenshot.png)
+Anime metadata is fetched from the [AniList GraphQL API](https://anilist.gitbook.io/anilist-apiv2-docs/overview/graphql/getting-started) via `fetch_anilist.py`. Cover images are served from AniList CDN (`s4.anilist.co`).
+
+## Deployment
+
+```r
+rsconnect::setAccountInfo(
+  name   = "invweb",
+  token  = "...",
+  secret = "..."
+)
+rsconnect::deployApp(appName = "anime-dashboard", forceUpdate = TRUE)
+```
